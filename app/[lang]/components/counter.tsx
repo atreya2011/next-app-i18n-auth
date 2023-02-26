@@ -1,5 +1,6 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 
 export default function Counter({
@@ -11,8 +12,11 @@ export default function Counter({
   }
 }) {
   const [count, setCount] = useState(0)
+  const { data: session } = useSession()
+  console.log(session)
   return (
     <p>
+      <p>{session?.user?.name}</p>
       This compoment is rendered on client:{' '}
       <button onClick={() => setCount((n) => n - 1)}>
         {dictionary.decrement}
